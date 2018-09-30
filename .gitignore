@@ -1,0 +1,6 @@
+*.pdf
+*.pyc
+*.csv
+*.idea/
+*.png
+*.egg-info/

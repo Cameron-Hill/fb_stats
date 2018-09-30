@@ -1,0 +1,7 @@
+numpy==1.14.5
+nltk==3.3
+Jinja2==2.10
+pandas==0.23.3
+setuptools==39.2.0
+click==6.7
+beautifulsoup4==4.6.3

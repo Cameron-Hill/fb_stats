@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+</head>
+<body>
+
+<h1>Nicola Scott</h1>
+<div id="UserCounts" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+<script>
+
+    Highcharts.chart('UserCounts', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'User Counts'
+    },
+    subtitle: {
+        text: 'Summary of messages posted per user'
+    },
+    xAxis: {
+        categories: [""],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Messages Sent'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y}</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{'name': 'Nicola Scott', 'data': [7]}, {'name': 'Cameron Hill', 'data': [3]}]
+});
+
+</script><div id="MessageHistogram" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+<script>
+Highcharts.chart('MessageHistogram', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Message Histogram'
+    },
+    subtitle: {
+        text: 'Messages sent per person per month'
+    },
+    xAxis: {
+        categories: ['(2015, 4)', '(2016, 7)', '(2017, 6)', '(2017, 8)', '(2018, 7)']
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Total fruit consumption'
+        },
+        stackLabels: {
+            enabled: true,
+            style: {
+                fontWeight: 'bold',
+                color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+            }
+        }
+    },
+    legend: {
+        align: 'right',
+        x: -30,
+        verticalAlign: 'top',
+        y: 25,
+        floating: true,
+        backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+        borderColor: '#CCC',
+        borderWidth: 1,
+        shadow: false
+    },
+    tooltip: {
+        headerFormat: '<b>{point.x}</b><br/>',
+        pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+    },
+    plotOptions: {
+        column: {
+            stacking: 'normal',
+            dataLabels: {
+                enabled: false,
+                color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+            }
+        }
+    },
+    series: [{'name': 'Cameron Hill', 'data': [0.0, 0.0, 2.0, 0.0, 1.0]}, {'name': 'Nicola Scott', 'data': [2.0, 2.0, 1.0, 1.0, 1.0]}]
+});
+
+</script><div id="CumulativeFrequency"></div>
+
+<script>
+    Highcharts.chart('CumulativeFrequency', {
+
+    title: {
+        text: 'Cumulative Frequency'
+    },
+
+    subtitle: {
+        text: 'A cumulative total of the messages sent per person, per month.'
+    },
+    xAxis: {
+        categories: ['(2015, 4)', '(2016, 7)', '(2017, 6)', '(2017, 8)', '(2018, 7)']
+    },
+    yAxis: {
+        title: {
+            text: 'Messages Sent'
+        }
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle'
+    },
+
+    plotOptions: {
+        series: {
+            label: {
+                connectorAllowed: false
+            }
+        }
+    },
+
+    series: [{'name': 'Cameron Hill', 'data': [0.0, 0.0, 2.0, 2.0, 3.0]}, {'name': 'Nicola Scott', 'data': [2.0, 4.0, 5.0, 6.0, 7.0]}],
+
+    responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                legend: {
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'bottom'
+                }
+            }
+        }]
+    }
+
+});
+</script></body>
+</html>
