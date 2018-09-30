@@ -14,10 +14,10 @@ it should also be callable from python programs to return the results in a varie
 The program should generate an HTML document to display the results.
 ..
 
-###Usage
+### Usage
 Usage instructions to follow
 
-##Task list
+## Task list
 
 - [ ] Seperate word count data into something meaningful
 - [x] Explore JS options for data viz i.e. Highcharts, maybe something else.
@@ -29,11 +29,11 @@ Usage instructions to follow
      - [ ] Solid command line Interface
      - [ ] Basic API 
      
-###Issues
+### Issues
 - User count colours are inconsistent - 30/09/18
 - Error using datasets with more than 2 users:<br>  d["data"].append({"name": name, "data": list(data["data"][i])})
 IndexError: list index out of range
 
-####Other potential features
+#### ther potential features
 - Sentiment score over time? (very small text :/ )
 

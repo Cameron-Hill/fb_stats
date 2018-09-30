@@ -5,7 +5,7 @@ with open("README.md", "r") as f:
 
 setup(
     name='FacebookStatGenerator',
-    version='0.3',
+    version='0.4',
     description="A program that generates statistical summaries for provided facebook data",
     long_description=readme,
     packages=find_packages(),
@@ -18,7 +18,7 @@ setup(
     ],
     extras_require = {
         "Lemmatizer": ["nltk >= 3.3"],
-        "Tests": ["beautifulsoup4==4.6.3"]
+        "Tests": ["beautifulsoup4>=4.6.3"]
     },
     entry_points={
         'console_scripts': [
