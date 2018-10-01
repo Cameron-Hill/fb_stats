@@ -26,8 +26,12 @@ class CliTest(unittest.TestCase):
 
     def get_soup(self):
         html_file = [file for file in os.listdir('.') if file.endswith('.html')]
-        with open(html_file[0], encoding="utf-8") as f:
-            soup = bs(f, 'html.parser')
+        try:
+            with open(html_file[0], encoding="utf-8") as f:
+                soup = bs(f, 'html.parser')
+        except IndexError:
+            self.fail(
+                "HTML file failed to generate: \n An error forced the program to stop before the file could be generated")
         return soup
 
     def get_scripts(self):
@@ -112,7 +116,6 @@ class CliTest(unittest.TestCase):
             self.assertTrue(re.search(expected_js_data_for_amelia, javascript))
             self.assertTrue(re.search(expected_js_data_for_douglas, javascript))
 
-
     def validation_tests_for_group_message_cum_freq(self):
         with self.runner.isolated_filesystem():
             self.initialise_enviroment(options=["--cum-freq"], group=True)
@@ -128,10 +131,26 @@ class CliTest(unittest.TestCase):
             self.assertTrue(re.search(expected_js_data_for_douglas, javascript))
 
     def test_that_running_build_with_no_options_runs_all_avalible_stat_types(self):
-        """As Types are added please add then to this list"""
-        avalible_types = [
+        # As Types are added please add then to this list
+        avalible_types = set([
             "UserCounts",
-            "Message_Hist",
+            "MessageHistogram",
             "CumulativeFrequency",
-        ]
+        ])
+        with self.runner.isolated_filesystem():
+            self.initialise_enviroment()
+            scripts = self.get_scripts()
+            found = set([])
+            for script in scripts:
+                for type in avalible_types:
+                    if type in script.text:
+                        found.add(type)
+            self.assertEqual(len(avalible_types), len(found))
 
+    def test_that_running_build_with_two_options_only_generates_those_scripts(self):
+        with self.runner.isolated_filesystem():
+            self.initialise_enviroment(options=["--user-counts", "--message-his"])
+            scripts = self.get_scripts()
+            for script in scripts:
+                if "CumulativeFrequency" in script.text:
+                    self.fail("The term Cumulative Frequecny should not appear in any scripts")

@@ -31,5 +31,5 @@ class StatTypes:
         "MESSAGE_HISTOGRAM": builders.MessageHistogram,
         "CUMULATIVE_FREQUENCY": builders.CumulativeFrequency,
         "WORD_FREQUENCY": builders.WordFrequency,
-        "LINK_MATRIX": builders.LinkMatrix,
+        "LINK_MATRIX": builders.HeatMap,
     }

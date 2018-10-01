@@ -89,10 +89,8 @@ class WordFrequency(_Builder):
         return self._generate_counts()
 
     def _generate_counts(self):
-        # TODO this can be improved
         from collections import Counter
         dic = {}
-        df = pd.DataFrame()
         for member in self.gen.participants:
             counts = Counter()
             messages = self.gen.data.loc[self.gen.data["sender_name"] == member]["content"].dropna().tolist()
@@ -103,9 +101,9 @@ class WordFrequency(_Builder):
         return pd.DataFrame().from_dict(dic).fillna(0)
 
 
-class LinkMatrix(_Builder):
+class HeatMap(_Builder):
     def __init__(self, generator, normalise=True, exclude=[]):
-        self.name = "LinkMatrix"
+        self.name = "HeatMap"
         self.gen = generator
         self.exclude = exclude
         self.do_normalisation = normalise
@@ -147,5 +145,5 @@ all_builders = set(
      MessageHistogram,
      CumulativeFrequency,
      WordFrequency,
-     LinkMatrix]
+     HeatMap]
 )

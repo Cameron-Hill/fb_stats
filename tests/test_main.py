@@ -45,7 +45,7 @@ class RedesignTests(unittest.TestCase):
 
     def test_that_link_matrix_describes_accurate_interactions_when_not_normalised(self):
         gen = Generator(self.path + self.single_test_json)
-        link_matrix_df = builders.LinkMatrix(gen, normalise=False).get_data()
+        link_matrix_df = builders.HeatMap(gen, normalise=False).get_data()
         expected_times_nicola_followed_nicola = 4
         expected_times_nicola_followed_cameron = 2
         expected_times_cameron_followed_cameron = 1
@@ -58,7 +58,7 @@ class RedesignTests(unittest.TestCase):
 
     def test_that_normalised_matrix_reports_accurate_fractions(self):
         gen = Generator(self.path + self.single_test_json)
-        link_matrix_df = builders.LinkMatrix(gen, normalise=True).get_data()
+        link_matrix_df = builders.HeatMap(gen, normalise=True).get_data()
         total_nicola = 6
         total_cameron = 3
 
@@ -117,7 +117,7 @@ class RedesignTests(unittest.TestCase):
 
     def test_that_link_matrix_describes_accurate_interactions_for_group_when_not_normalised(self):
         gen = Generator(self.path + self.group_test_json)
-        link_matrix_df = builders.LinkMatrix(gen, normalise=False).get_data()
+        link_matrix_df = builders.HeatMap(gen, normalise=False).get_data()
         expected_times_lindsay_followed_cameron = 5
         expected_times_cameron_followed_douglas = 1
         expected_times_douglas_followed_amelia = 0
@@ -130,7 +130,7 @@ class RedesignTests(unittest.TestCase):
 
     def test_that_normalised_matrix_reports_accurate_fractions_for_group(self):
         gen = Generator(self.path + self.group_test_json)
-        link_matrix_df = builders.LinkMatrix(gen, normalise=True).get_data()
+        link_matrix_df = builders.HeatMap(gen, normalise=True).get_data()
         total_lindsay = 8
         total_cameron = 7
         total_amelia = 2
