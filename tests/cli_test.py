@@ -149,7 +149,7 @@ class CliTest(unittest.TestCase):
 
     def test_that_running_build_with_two_options_only_generates_those_scripts(self):
         with self.runner.isolated_filesystem():
-            self.initialise_enviroment(options=["--user-counts", "--message-his"])
+            self.initialise_enviroment(options=["--user-counts", "--message-hist"])
             scripts = self.get_scripts()
             for script in scripts:
                 if "CumulativeFrequency" in script.text:
