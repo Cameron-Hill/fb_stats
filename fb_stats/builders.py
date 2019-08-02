@@ -85,7 +85,7 @@ class WordFrequency(_Builder):
         self.gen = generator
         self.exclude = exclude
 
-    def get_data(self):
+    def get_data(self, to_js=False):
         return self._generate_counts()
 
     def _generate_counts(self):
@@ -102,21 +102,30 @@ class WordFrequency(_Builder):
 
 
 class HeatMap(_Builder):
-    def __init__(self, generator, normalise=True, exclude=[]):
+    def __init__(self, generator, normalise=True, exclude=None, normalise_percent=False):
+        exclude = exclude or []
         self.name = "HeatMap"
         self.gen = generator
         self.exclude = exclude
         self.do_normalisation = normalise
+        self.normalise_percent = normalise_percent
 
-    def get_data(self):
+    def get_data(self, to_js=False):
         df = self._generate_counts().T
         if self.do_normalisation:
             df = self.normalise_data(df)
+        if to_js:
+            df = self._convert_to_js(df)
         return df
 
-    @staticmethod
-    def normalise_data(df):
-        return df.div(df.sum(axis=1), axis=0)
+    def normalise_data(self, df, round_to=3):
+        return (df.div(df.sum(axis=1), axis=0) * (100 if self.normalise_percent else 1)).round(round_to)
+
+
+    def _convert_to_js(self, df):
+        return {'index': df.index.tolist(),  'normalised':self.do_normalisation,
+                'data': [[i, j, x] for i, a in enumerate(df.values.tolist()) for j, x in enumerate(a)]}
+
 
     def _generate_counts(self):
         import numpy as np
@@ -140,10 +149,10 @@ class HeatMap(_Builder):
                             )
 
 
-all_builders = set(
-    [UserCounts,
-     MessageHistogram,
-     CumulativeFrequency,
-     WordFrequency,
-     HeatMap]
-)
+all_builders = {
+    UserCounts,
+    MessageHistogram,
+    CumulativeFrequency,
+    WordFrequency,
+    HeatMap
+}

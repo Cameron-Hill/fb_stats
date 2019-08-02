@@ -3,6 +3,7 @@ Navigate to the folder with the json file upon which you wish to run the analysi
 import click
 from fb_stats import Generator, builders, html_generator
 import numpy as np
+import sys
 
 
 @click.group()
@@ -29,7 +30,6 @@ def build(file, exclude, **options):
         When no Stat Types are specified, All Stat Types are used to generate the report"""
 
     options = {k: not v if not any(options.values()) else v for k, v in options.items()}
-
     generator = Generator(file)
     stat_types_to_generate = set()
     if options["user_counts"]:
@@ -41,12 +41,12 @@ def build(file, exclude, **options):
     if options["cum_freq"]:
         stat_types_to_generate.add(builders.CumulativeFrequency(generator))
 
-    # if kwargs["heat_map"]:
-    #     #stat_types_to_generate.add(builders.HeatMap(generator))
-    #     # stat_types_to_generate.add({
-    #     #     "norm":builders.HeatMap(generator, normalise=True),
-    #     #     "base":builders.HeatMap(generator, normalise=False),
-    #     # })
+    if options["heat_map"]:
+        stat_types_to_generate.add(builders.HeatMap(generator, normalise=True, normalise_percent=True))
+    # #     # stat_types_to_generate.add(builders.HeatMap(generator, ))
+    # #     #     "norm":builders.HeatMap(generator, normalise=True),
+    # #     #     "base":builders.HeatMap(generator, normalise=False),
+    # #     # })
 
     data = {type(x).__name__: x.get_data(to_js=True) for x in stat_types_to_generate}
     data["options"] = list(data.keys())
@@ -54,3 +54,9 @@ def build(file, exclude, **options):
     html_generator.generate(data)
 
     click.echo("Report Generated: " + data["title"] + ".html")
+
+if __name__ == '__main__':
+    from click.testing import CliRunner
+    result = CliRunner().invoke(build, args=sys.argv[1:],
+                     mix_stderr=True)
+    print(result.output)

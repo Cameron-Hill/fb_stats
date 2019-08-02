@@ -33,3 +33,7 @@ class StatTypes:
         "WORD_FREQUENCY": builders.WordFrequency,
         "LINK_MATRIX": builders.HeatMap,
     }
+
+if __name__ == '__main__':
+    x = run(r'G:\Resources\Facebook\messages\YoureARemotard_7ded9e3ffb\message.json')
+    a=1

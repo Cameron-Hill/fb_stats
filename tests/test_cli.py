@@ -58,7 +58,7 @@ class CliTest(unittest.TestCase):
             valid_div = soup.find("div", {"id": "UserCounts"})
             self.assertTrue(valid_div)
 
-    def validation_test_for_single_user_counts(self):
+    def test_validation_test_for_single_user_counts(self):
         with self.runner.isolated_filesystem():
             self.initialise_enviroment(options=["--user-counts"])
             scripts = self.get_scripts()
@@ -68,7 +68,7 @@ class CliTest(unittest.TestCase):
             self.assertTrue(re.search(expected_js_data_for_cameron, javascript))
             self.assertTrue(re.search(expected_js_data_for_nicola, javascript))
 
-    def validation_test_for_single_message_histogram(self):
+    def test_validation_test_for_single_message_histogram(self):
         with self.runner.isolated_filesystem():
             self.initialise_enviroment(options=["--message-hist"])
             scripts = self.get_scripts()
@@ -78,7 +78,7 @@ class CliTest(unittest.TestCase):
             self.assertTrue(re.search(expected_js_data_for_cameron, javascript))
             self.assertTrue(re.search(expected_js_data_for_nicola, javascript))
 
-    def validation_tests_for_single_message_cum_freq(self):
+    def test_validation_tests_for_single_message_cum_freq(self):
         with self.runner.isolated_filesystem():
             self.initialise_enviroment(options=["--cum-freq"])
             scripts = self.get_scripts()
@@ -88,7 +88,7 @@ class CliTest(unittest.TestCase):
             self.assertTrue(re.search(expected_js_data_for_cameron, javascript))
             self.assertTrue(re.search(expected_js_data_for_nicola, javascript))
 
-    def validation_test_for_group_user_counts(self):
+    def test_validation_test_for_group_user_counts(self):
         with self.runner.isolated_filesystem():
             self.initialise_enviroment(options=["--user-counts"], group=True)
             scripts = self.get_scripts()
@@ -102,7 +102,7 @@ class CliTest(unittest.TestCase):
             self.assertTrue(re.search(expected_js_data_for_amelia, javascript))
             self.assertTrue(re.search(expected_js_data_for_douglas, javascript))
 
-    def validation_test_for_group_message_histogram(self):
+    def test_validation_test_for_group_message_histogram(self):
         with self.runner.isolated_filesystem():
             self.initialise_enviroment(options=["--message-hist"], group=True)
             scripts = self.get_scripts()
@@ -116,7 +116,7 @@ class CliTest(unittest.TestCase):
             self.assertTrue(re.search(expected_js_data_for_amelia, javascript))
             self.assertTrue(re.search(expected_js_data_for_douglas, javascript))
 
-    def validation_tests_for_group_message_cum_freq(self):
+    def test_validation_tests_for_group_message_cum_freq(self):
         with self.runner.isolated_filesystem():
             self.initialise_enviroment(options=["--cum-freq"], group=True)
             scripts = self.get_scripts()

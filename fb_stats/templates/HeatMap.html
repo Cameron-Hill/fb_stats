@@ -1,0 +1,67 @@
+<div id="HeatMap" style="height: 500px; min-width: 310px; max-width: 1200px; margin: 0 auto"></div>
+
+<script>
+    Highcharts.chart('HeatMap', {
+
+    chart: {
+        type: 'heatmap',
+        marginTop: 40,
+        marginBottom: 80,
+        plotBorderWidth: 1
+    },
+
+
+    title: {
+        text: 'Familiarity Matrix'
+    },
+    subtitle: {
+        text: 'Frequency with which the person on the y axis, responds to the person on the x axis ',
+        y: 25,
+    },
+    xAxis: {
+        categories: {{data.index}},
+        title: 'Message Sender'
+    },
+
+    yAxis: {
+        categories: {{data.index}},
+        title: "Message Responder"
+    },
+
+    colorAxis: {
+        min: 0,
+        minColor: '#FFFFFF',
+        maxColor: Highcharts.getOptions().colors[3]
+    },
+
+    legend: {
+        align: 'right',
+        layout: 'vertical',
+        margin: 0,
+        verticalAlign: 'top',
+        y: 25,
+        symbolHeight: 280
+    },
+
+    tooltip: {
+        formatter: function () {
+            {% if data.normalised %}
+            return '<b>' + this.series.yAxis.categories[this.point.y] + '</b> Responded to '+this.point.value + '%  of all <b>' + this.series.xAxis.categories[this.point.x] + "'s</b> messages";
+            {% else %}
+            return '<b>' + this.series.yAxis.categories[this.point.y] + '</b> Responded to <b>' + this.series.xAxis.categories[this.point.x] + '</b>  '+this.point.value + '  times.';
+            {% endif %}
+        }
+    },
+
+    series: [{
+        name: 'Familiarity Metric',
+        borderWidth: 1,
+        data: {{data.data}},
+        dataLabels: {
+            enabled: true,
+            color: '#000000'
+        }
+    }]
+
+});
+</script>

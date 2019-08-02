@@ -143,3 +143,4 @@ class RedesignTests(unittest.TestCase):
         self.assertEqual(expected_times_cameron_followed_douglas, link_matrix_df["Douglas Matheson"]["Cameron Hill"])
         self.assertEqual(expected_times_douglas_followed_amelia, link_matrix_df["Amelia Ford"]["Douglas Matheson"])
         self.assertEqual(expected_times_amelia_followed_lindsay, link_matrix_df["Lindsay Young"]["Amelia Ford"])
+
