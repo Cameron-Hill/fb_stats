@@ -34,6 +34,4 @@ Usage instructions to follow
 - Error using datasets with more than 2 users:<br>  d["data"].append({"name": name, "data": list(data["data"][i])})
 IndexError: list index out of range
 
-#### ther potential features
-- Sentiment score over time? (very small text :/ )
 
