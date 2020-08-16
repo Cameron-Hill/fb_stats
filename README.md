@@ -28,10 +28,6 @@ Usage instructions to follow
      - [x] Basic IMG or JS visual options
      - [ ] Solid command line Interface
      - [ ] Basic API 
-     
-### Issues
-- User count colours are inconsistent - 30/09/18
-- Error using datasets with more than 2 users:<br>  d["data"].append({"name": name, "data": list(data["data"][i])})
-IndexError: list index out of range
+
 
 
